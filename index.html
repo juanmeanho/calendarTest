@@ -59,4 +59,61 @@
 
 
 </body>
+</html> 
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/app.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="datepicker">
+    Start Date   <vuejs-datepicker v-model="date"></vuejs-datepicker><br>
+    Number of days: <br><input v-model="numberDays" type="text" @change="renderCalendar(date)"><br>
+    Country Code: <br><input type="text" @change="renderCalendar(date)">
+    
+
+        <span></span>
+
+
+        <br><br>
+
+        <div v-for="header in headerMonth"> 
+        <div class="month" >
+            <ul>
+              <li ><span style="font-size:18px">{{ header }} </span></li>
+            </ul>
+        </div>
+
+          <ul class="weekdays">
+            <li>S</li>
+            <li>M</li>
+            <li>T</li>
+            <li>W</li>
+            <li>T</li>
+            <li>F</li>
+            <li>S</li>
+          </ul>
+          
+          <ul class="days"  > 
+            <li 
+                v-for="day in daysPrint" 
+                v-show="(day.month+'-'+day.year) === header">
+                <span :class="checkDays(day.day, day.nominalDay)" >
+                    {{ day.day }}
+                </span>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+    
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+    <script src="js/main.js"></script>  
+   
+</body>
 </html>

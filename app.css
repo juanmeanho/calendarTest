@@ -22,17 +22,7 @@ body {font-family: Verdana, sans-serif;}
     letter-spacing: 3px;
 }
 
-/* Previous button inside month header */
-.month .prev {
-    float: left;
-    padding-top: 10px;
-}
 
-/* Next button */
-.month .next {
-    float: right;
-    padding-top: 10px;
-}
 
 /* Weekdays (Mon-Sun) */
 .weekdays {
@@ -43,7 +33,7 @@ body {font-family: Verdana, sans-serif;}
 
 .weekdays li {
     display: inline-block;
-    width: 13.6%;
+    width: 13.3%;
     color: #666;
     text-align: center;
 }
@@ -60,14 +50,26 @@ body {font-family: Verdana, sans-serif;}
     display: inline-block;
     width: 13.6%;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-size:12px;
     color: #777;
 }
 
-/* Highlight the "current" day */
-.days li .active {
-    padding: 5px;
-    background: #1abc9c;
+/* Highlight the day */
+.days li .invalid {
+    padding: 5px 11px;
+    background: #A0A0A0;
     color: white !important
+}
+
+.days li .weekdays {
+    padding: 5px;
+    background: #95f095;
+    color: black !important
+}
+
+.days li .weekend {
+    padding: 5px;
+    background: #ffff8d;
+    color: black !important
 }
