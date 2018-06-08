@@ -1,30 +1,32 @@
- 
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="app.css">
-    <title>Document</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="app.css">
+        <title>Document</title>
 </head>
 
 <body>
 
     <div id="datepicker">
     Start Date   <vuejs-datepicker v-model="date"></vuejs-datepicker><br>
-    Number of days: <br><input v-model="numberDays" type="text" @change="sum(date, numberDays)">
-    
+    Number of days: <br><input v-model="numberDays" type="text"
+@change="renderCalendar()">
+    <!-- Country Code: <br><input v-model="countryCode" type="text"
+@change="sum(date, numberDays)"> -->
 
+
+        <span></span>
 
 
         <br><br>
 
-        <div v-for="month in monthsPrint"> 
+        <div v-for="header in headerMonth">
         <div class="month" >
             <ul>
-              <li><span style="font-size:18px">{{ month }}</span></li>
+              <li ><span style="font-size:18px">{{ header }} </span></li>
             </ul>
         </div>
-          
-          
+
           <ul class="weekdays">
             <li>S</li>
             <li>M</li>
@@ -34,43 +36,14 @@
             <li>F</li>
             <li>S</li>
           </ul>
-          
-          <ul class="days"> 
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li><span class="active">10</span></li>
-            <li>11</li>
-            <li>12</li>
-            <li>13</li>
-            <li>14</li>
-            <li>15</li>
-            <li>16</li>
-            <li>17</li>
-            <li>18</li>
-            <li>19</li>
-            <li><span class="active">20</span></li>
 
-            <li>21</li>
-            <li>22</li>
-            <li>23</li>
-            <li>24</li>
-            <li>25</li>
-            <li>26</li>
-            <li>27</li>
-            <li>28</li>
-            <li>29</li>
-            <li>30</li>
-            <li>31</li>
+          <ul class="days" >
+                <li v-for="day in daysPrint">{{ day }}</li>
+                <!--<li><span class="active">20</span></li>-->
           </ul>
         </div>
-        
+
+
 
 
     <pre >{{ $data }}</pre>
@@ -78,18 +51,17 @@
     </div>
 
 
-    
-   
+
+
 
 
     <script src="https://unpkg.com/vue"></script>
-    <!-- <script src="js/vue.js"></script> -->
     <script src="https://unpkg.com/vuejs-datepicker"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script> 
-    <script src="main.js"></script>  
-    
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+    <script src="main.js"></script>
 
-   
+
+
+
 </body>
 </html>

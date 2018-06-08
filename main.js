@@ -6,64 +6,92 @@ const datepicker = new Vue({
     data: {
         date: null,
         numberDays: null,
-        fecha: null,
-        fecha_fin: null,
-        numberMonths: null,
-        monthsPrint: [],
-        monthInit: null,
-        months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-        yearInit: null,
-        yearPrint: null,
-        dayInit: null,
-        dayPrint: []
-       
+        headerMonth: [],
+        headerYear: [],
+        daysPrint: [],
+        months:
+['January','February','March','April','May','June','July','August','September','October','November','December'],
+
+
     },
     methods: {
-        
 
-        sum(date, numberDays){
+        renderCalendar(){
 
-            if(this.monthsPrint != '')
-                this.monthsPrint = [];
+            this.headerMonth = [];
+            this.daysPrint = [];
 
-            this.fecha = new Date(date);
-            this.fecha_fin = new Date();
-            this.dayInit = this.fecha.getDate();
-            this.monthInit = this.fecha.getMonth()+1;
-            this.yearInit = this.fecha.getFullYear();
-            this.yearPrint = this.fecha.getFullYear();
-            this.fecha_fin.setDate(this.fecha.getDate() + eval(numberDays));
-            
-            console.log(
-                "Fecha inicio: " +
-                this.fecha.getDate() + "/" +
-                (this.fecha.getMonth()+1) + "/" +
-                this.fecha.getFullYear()
-              );
-            console.log(
-                "<br>Fecha fin: " +
-                this.fecha_fin.getDate() + "/" +
-                (this.fecha_fin.getMonth()+1) + "/" +
-                this.fecha_fin.getFullYear()
-              );
+            var yearInit = this.date.getFullYear();
+            var monthInit = this.date.getMonth()+1;
+            fecha = new Date(this.date);
+            var end_date = new Date();
+            end_date.setDate(fecha.getDate() + eval(this.numberDays));
+            //alert(end_date);
 
-              this.numberMonths = moment(this.fecha_fin).diff(moment(this.fecha), 'months');
-              
+            numberMonths = moment(end_date).diff(moment(fecha),'months')+1; //numero de meses
 
-              for(i = 0, j = this.monthInit - 1; i < this.numberMonths + 1; i++, j++){
-                this.monthsPrint.push(this.months[j] +'-'+ this.yearPrint)
-                if(i < 11)
-                    this.yearPrint = this.yearInit;
+            for(var k = 0, j = monthInit - 1; k < numberMonths; k++, j++){
+
+                this.headerMonth.push(this.months[j]+'-'+yearInit);
+
+                var dynamicDate = new Date(yearInit, j, 1)
+
+                //alert(dynamicDate)
+
+                var a = renderCalendar(dynamicDate);
+                //alert(a);
+                this.daysPrint = a;
+
                 if(this.months[j] == 'December'){
                         j = -1;
-                        this.yearPrint++;
+                        yearInit++;
                     }
             }
+            //alert(month);
 
-            for(k = this.dayInit ; k < this.numberDays; k++){
-                this.dayPrint.push(this.dayInit)
+            function renderCalendar(date) {
+                //alert(date)
+                //var firstDay = date.getDate();
+                //alert(firstDay)
+                var month = date.getMonth()+1;
+                var year = date.getFullYear();
+                var now = new Date(year,month-1,1); //1er dia del mes actual seleccionado fecha larga
+                var last = new Date(year,month,0); //ultimo dia delmes seleccionado fecha larga
+                var firstDayWeek=date.getDay(); //primer dia nominal seleccionado
+                var lastDayName = new Date(last).getDay(); //Ultimodia del mes Nominal BORRAR
+                var lastDayMonth=last.getDate(); //ultimo dia del messeleccionado DD
+                var last_cell=firstDayWeek+lastDayMonth; //total de celdas
+                var days = [];
+
+                //this.headerMonth = this.allMonths[month-1];
+                //this.headerYear = year;
+
+                var dia=0;
+                //alert(now+'-'+last+'-'+firstDayWeek+'-'+lastDayMonth+'-'+last_cell)
+
+                for(var i = 0; i <= 41 ; i++) //numero maximo de celdas
+                {
+                    if(i == firstDayWeek) //captura el primer dia
+                    {
+                        dia = 1;
+                        days.push(dia);
+                    }
+                    if(i < firstDayWeek || i >= last_cell - 1){
+                      //  alert(this.lastDayMonth);
+                        if(i%7 == 6 && dia == lastDayMonth)
+                            break;
+                        days.push('x'); //celda vacia
+                        }
+                    else
+                        days.push(++dia);
+
+                }
+
+                return days;
+
             }
+
+
         }
     }
   });
-  
