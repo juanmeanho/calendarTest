@@ -20,10 +20,10 @@
 
         <br><br>
 
-        <div v-for="head in header">
+        <div v-for="header in headerMonth">
         <div class="month" >
             <ul>
-              <li ><span style="font-size:18px">{{ head.month }}-{{ head.year }} </span></li>
+              <li ><span style="font-size:18px">{{ header }} </span></li>
             </ul>
         </div>
 
@@ -38,7 +38,7 @@
           </ul>
 
           <ul class="days" >
-                <li >{{ head.days }}</li>
+                <li v-for="day in daysPrint">{{ day }}</li>
                 <!--<li><span class="active">20</span></li>-->
           </ul>
         </div>
@@ -49,11 +49,6 @@
     <pre >{{ $data }}</pre>
 
     </div>
-
-
-
-
-
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuejs-datepicker"></script>
